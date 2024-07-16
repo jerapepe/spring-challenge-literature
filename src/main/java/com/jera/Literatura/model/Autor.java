@@ -18,26 +18,28 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String nombre;
+    private String name;
     private int anioNacimiento;
     private int anioFallecimiento;
 
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Libro> libros = new ArrayList<>();
+    private List<Book> libros = new ArrayList<>();
 
-    public Autor(DatosAutor datosAutor){
-        this.nombre = datosAutor.nombre();
-        this.anioNacimiento = datosAutor.anioNacimiento();
-        this.anioFallecimiento = datosAutor.anioFallecimiento();
+    public Autor(DataAutor dataAutor){
+        this.name = dataAutor.name();
+        this.anioNacimiento = dataAutor.anioNacimiento();
+        this.anioFallecimiento = dataAutor.anioFallecimiento();
     }
 
     @Override
     public String toString() {
-        return "\nAutor: " + nombre + "\n" +
+        return "\n Autor: " + name + "\n" +
                 "Fecha de nacimiento: " + anioNacimiento + "\n" +
                 "Fecha de fallecimiento: " + anioFallecimiento +"\n" +
-                "Libros: " + libros.stream().map(Libro::getTitulo).toList() + "\n";
+                "Libros: " + libros.stream().map(Book::getTitulo).toList() + "\n";
 
     }
-
+    public String getNombre() {
+        return name;
+    }
 }
